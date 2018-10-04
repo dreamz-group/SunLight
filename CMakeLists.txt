@@ -6,7 +6,7 @@ option( INCLUDE_LIBSUNLIGHT "Include libSunLight" ON )
 if( NOT ${INCLUDE_LIBSUNLIGHT} )
     return()
 endif()
-
+option( make_tests "Build g tests" OFF )
 project(SunLight)
 
 

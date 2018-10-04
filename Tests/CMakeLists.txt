@@ -3,7 +3,6 @@ find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS} ../ ./)
 
 file(GLOB SOURCE "*.cpp" "../*.cpp")
-#LIST(REMOVE_ITEM SOURCE ${CMAKE_CURRENT_SOURCE_DIR}/../metad.cpp)
 
 add_executable(SunLight_tests ${SOURCE} )
 

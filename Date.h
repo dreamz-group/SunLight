@@ -13,6 +13,8 @@ public:
     Date(double); //!< Juliandate
     Date(const time_t& time);
     double toJulianDate() const;
+    static time_t julianDateToTimeT(double jd); //!< Converst julian date to time_t
+    static time_t ToTimeT(const Date& d, double time); //!< Combine julian timestamp and date to create a new time_t
 };
 
 #endif // __SUN_CALC_DATE_H__

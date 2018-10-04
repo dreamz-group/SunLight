@@ -15,31 +15,9 @@ SunCalc::SunCalc(const Date &date, double latitude, double longitude)
     _julianDate = date.toJulianDate();
 }
 
-time_t SunCalc::ToTimeT(const Date& d, double x)
-{
-    struct tm tm;
-    memset(&tm, 0, sizeof(struct tm));
-    tm.tm_year  = d.year - 1900;
-    tm.tm_mon   = d.month - 1;
-    tm.tm_mday  = d.day;
-    time_t date = mktime(&tm); // Make time creates the time assuming the current time, remove gmtoff later!
-
-    int min = floor(x);
-    double sec = x - floor(x);
-    date += (min * 60) + (sec * 60.0);
-
-    date += tm.tm_gmtoff - (tm.tm_isdst * 3600); 
-    return date;
-}
-
 double SunCalc::timeAtAngle(float angle, bool rising)
 {
     return calcSunriseSet(rising, angle, _julianDate, _date, _latitude, _longitude);
-}
-
-time_t SunCalc::JdToDate(double jd)
-{
-    return (jd - 2440587.5) * 86400.0;
 }
 
 // rise = true for sunrise, false for sunset
@@ -50,7 +28,7 @@ time_t SunCalc::calcSunriseSet(bool rise, float angle, double JD, Date date, dou
 
     if (!isnan(newTimeUTC))
     {
-        return ToTimeT(_date, newTimeUTC);
+        return Date::ToTimeT(_date, newTimeUTC);
     }
     // no sunrise/set found
     double doy = calcDoyFromJD(JD);
@@ -68,7 +46,7 @@ time_t SunCalc::calcSunriseSet(bool rise, float angle, double JD, Date date, dou
     }
     timeUTC = calcSunriseSetUTC(rise, angle, jdy, latitude, longitude);
     newTimeUTC = calcSunriseSetUTC(rise, angle, jdy + timeUTC / 1440.0, latitude, longitude);
-    return ToTimeT(Date(jdy), newTimeUTC);
+    return Date::ToTimeT(Date(jdy), newTimeUTC);
     //return JdToDate(jdy);
 }
 
