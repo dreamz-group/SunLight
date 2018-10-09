@@ -7,6 +7,15 @@
 
 #include "SunCalc.h"
 
+const float  SunCalc::sunrise          = 0.833;
+const float  SunCalc::sunriseEnd       = 0.3;
+const float  SunCalc::twilight         = 6.0;
+const float  SunCalc::nauticalTwilight = 12.0;
+const float  SunCalc::night            = 18.0;
+const float  SunCalc::goldenHour       = -6.0;  
+const double SunCalc::PI               = 3.141592653589793;
+
+
 SunCalc::SunCalc(const Date &date, double latitude, double longitude)
 {
     _date = date;

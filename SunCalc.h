@@ -4,15 +4,15 @@
 class SunCalc
 {
 public:    
-    static const float sunrise          = 0.833;
-    static const float sunriseEnd       = 0.3;
-    static const float twilight         = 6.0;
-    static const float nauticalTwilight = 12.0;
-    static const float night            = 18.0;
-    static const float goldenHour       = -6.0;  
+    static const float sunrise;
+    static const float sunriseEnd;
+    static const float twilight;
+    static const float nauticalTwilight;
+    static const float night;
+    static const float goldenHour;  
 
 private:
-    static const double PI=3.141592653589793;
+    static const double PI;
 
     double _latitude;
     double _longitude;
