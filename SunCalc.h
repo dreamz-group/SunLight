@@ -16,11 +16,12 @@ private:
 
     double _latitude;
     double _longitude;
+    double _altitude;
     Date   _date;
     double _julianDate;
 
 public:
-    SunCalc(const Date& date, double latitude, double longitude);
+    SunCalc(const Date& date, double latitude, double longitude, double altitude = 0.0);
     inline void ChangeDate(const Date& date) { _date = date; }
     time_t ToTimeT(const Date& d, double x);
 
@@ -34,6 +35,7 @@ private:
     double calcEquationOfTime(double t);
     double calcSunDeclination(double t);
     double calcHourAngle(float angle, double lat, double solarDec);
+    double getAltitudeCorrection(double altitude);
     double calcObliquityCorrection(double t);
     double calcGeomMeanLongSun(double t);
     double calcEccentricityEarthOrbit(double t);   

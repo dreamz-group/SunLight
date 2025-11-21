@@ -16,11 +16,12 @@ const float  SunCalc::goldenHour       = -6.0;
 const double SunCalc::PI               = 3.141592653589793;
 
 
-SunCalc::SunCalc(const Date &date, double latitude, double longitude)
+SunCalc::SunCalc(const Date &date, double latitude, double longitude, double altitude)
 {
     _date = date;
     _latitude = latitude;
     _longitude = longitude;
+    _altitude = altitude;
     _julianDate = date.toJulianDate();
 }
 
@@ -118,11 +119,25 @@ double SunCalc::calcSunDeclination(double t)
 
 double SunCalc::calcHourAngle(float angle, double lat, double solarDec)
 {
+    // Apply altitude correction to the angle
+    double correctedAngle = angle + getAltitudeCorrection(_altitude);
+    
     double latRad = degToRad(lat);
     double sdRad = degToRad(solarDec);
-    double HAarg = (cos(degToRad(90.0 + angle)) / (cos(latRad) * cos(sdRad)) - tan(latRad) * tan(sdRad));
+    double HAarg = (cos(degToRad(90.0 + correctedAngle)) / (cos(latRad) * cos(sdRad)) - tan(latRad) * tan(sdRad));
     double HA = acos(HAarg);
     return HA; // in radians (for sunset, use -HA)
+}
+
+double SunCalc::getAltitudeCorrection(double altitude)
+{
+    // Calculate the correction for altitude in meters
+    // Using the formula: correction = -2.076 * sqrt(altitude) / 60
+    // This accounts for the geometric horizon depression and atmospheric refraction
+    if (altitude <= 0.0)
+        return 0.0;
+    
+    return -2.076 * sqrt(altitude) / 60.0;
 }
 
 double SunCalc::calcObliquityCorrection(double t)

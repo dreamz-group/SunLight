@@ -23,10 +23,11 @@ class SunLight
     SunCalc *_sun;
     double _latitude;
     double _longitude;
+    double _altitude;
     Date _date;
 
   public:
-    SunLight(Date date, double latitude, double longitude);
+    SunLight(Date date, double latitude, double longitude, double altitude = 0.0);
 
     inline void Changer(Date date) { _date = date; }
 

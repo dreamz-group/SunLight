@@ -5,13 +5,14 @@
 
 #include "SunLight.h"
 
-SunLight::SunLight(Date date, double latitude, double longitude)
+SunLight::SunLight(Date date, double latitude, double longitude, double altitude)
 {
     _date = date;
     _latitude = latitude;
     _longitude = longitude;
+    _altitude = altitude;
 
-    _sun = new SunCalc(date, latitude, longitude);
+    _sun = new SunCalc(date, latitude, longitude, altitude);
 }
 
 /// \brief When the upper edge of the Sun appears over the eastern horizon in the morning (0.833 degrees)
