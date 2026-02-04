@@ -38,7 +38,7 @@ time_t SunCalc::calcSunriseSet(bool rise, float angle, double JD, Date date, dou
 
     if (!isnan(newTimeUTC))
     {
-        return Date::ToTimeT(_date, newTimeUTC);
+        return Date::ToTimeT(date, newTimeUTC);
     }
     // no sunrise/set found
     double doy = calcDoyFromJD(JD);

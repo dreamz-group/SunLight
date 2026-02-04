@@ -54,6 +54,32 @@ int main() {
 }
 ```
 
+## Testing
+
+### Install Google Test (GTest)
+
+```bash
+sudo apt-get install libgtest-dev
+cd /usr/src/gtest
+sudo cmake .
+sudo make
+sudo cp lib/*.a /usr/lib
+```
+
+### Running Tests
+
+1.  Build with tests enabled:
+```bash
+cd build
+cmake -DCMAKE_BUILD_TYPE=Release -Dmake_tests=ON ..
+make
+```
+
+2.  Run the tests:
+```bash
+./Tests/SunLight_tests
+```
+
 ## Reference
 
 *   [NOAA Solar Calculator](https://www.esrl.noaa.gov/gmd/grad/solcalc/index.html)
